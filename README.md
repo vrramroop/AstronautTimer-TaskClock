@@ -1,5 +1,5 @@
 # AstronautTimer-TaskClock
-A mission clock that allows astronauts to keep track of their tasks on the mission! Completely client-side website so it can be run if you have a web browser and the file downloaded or from github!!
+A mission clock and task tracker that allows astronauts to keep track of their tasks on the mission! Complete with time parser to allow for a smooth dashboard! Put in the time in 24 hour clock followed by the task and it'll automatically put it on the to do list with timers! 60-10 minutes before task is due and the task will turn yellow! 10 minutes left and it'll turn red! Completely client-side or hosted website so it can be run if you have a web browser or the file downloaded! 
 
 Credits: Background - https://www.space.com/27600-around-a-star-system-space-wallpaper.html
 
