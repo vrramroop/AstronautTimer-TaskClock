@@ -3,4 +3,6 @@ A mission clock and task tracker that allows astronauts to keep track of their t
 
 Credits: Background - https://www.space.com/27600-around-a-star-system-space-wallpaper.html
 
+Demo can be found at https://vrramroop.github.io/AstronautTimer-TaskClock/
+
 The versions are in zip files. There is 1 file, the html, and one folder, the image folder. The hosted version is the demo.
