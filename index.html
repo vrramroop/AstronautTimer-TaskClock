@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title> Mission Clock & Task Timer </title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="images/favicon.png" sizes="192x192" />
+	<style>
+        *{
+            font-family: Helvetica, serif;
+            font-size: 20pt;
+            margin: 0;
+            font-weight: bold;
+        }
+        #headeryesiknowthereisaheadertag{
+            width: 35%;
+            background: linear-gradient(to bottom right, #B80BAE15, #A1032F15, #410CAB15, #1CB0E815 );
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            border: 1px solid #ffffff20;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 #ffffff30;
+            padding: 20px;
+            margin: 20px auto;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            
+        }
+        #headeryesiknowthereisaheadertag p{
+            font-size: 30pt;
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+            background: url(images/background.jpg) no-repeat center center fixed;
+            background-size: cover;
+            z-index: -1;
+        }
+        #bigdiv{
+            background: linear-gradient(to bottom right, #B80BAE15, #A1032F15, #410CAB15, #1CB0E815 );
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            border: 1px solid #ffffff20;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 #ffffff30;
+            padding: 20px;
+            margin: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            height: 70%;
+        }
+        #typablestuffthingy{
+            width: 40%;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+        #skinnydiv{
+            width: 0.5%;
+            height: 90%;
+            margin: auto;
+            background-color: #ffffff70;
+            border-radius: 15px;
+        }
+        #houstonwehaveaproblemnotifier{
+            width: 40%;
+            height: 90%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-direction: column;
+        }
+        .bigparagrapheadingthing{
+            font-size: 25pt;
+            margin: 5px auto;
+            margin-bottom: 20px;
+        }
+        .active{
+            color: #EDC81A;
+            animation: blinkyblink 0.5s infinite;
+        }
+        .urgent{
+            color: #ED411A;
+            animation: blinkyblink 0.5s infinite;
+        }
+        @keyframes blinkyblink{
+            0% {opacity: 1;}
+            50% {opacity: 0.5;}
+            100% {opacity: 1;}
+        }
+    </style>
+</head>
+<body>
+    <div id="headeryesiknowthereisaheadertag">
+        <p>Mission Clock & Everyday Task Setter </p>
+    </div>
+    <div id="bigdiv">
+        <div id="typablestuffthingy" contenteditable="true">
+            <p style="font-style: italic;">Put your tasks here!</p>
+        </div>
+        <div id="skinnydiv"></div>
+        <div id="houstonwehaveaproblemnotifier">
+            <p class="bigparagrapheadingthing">
+                TASKS & TIMER
+            </p>
+            <div id="funniconsolethingy"></div>
+        </div>
+    </div>
+    <script>
+        const typablestuffthingy= document.getElementById('typablestuffthingy')
+        const funniconsolethingy = document.getElementById('funniconsolethingy')
+
+        function funnithingthatreadstuff() {
+            const lines = typablestuffthingy.innerText.split('\n')
+            funniconsolethingy.innerHTML = '';
+            
+
+
+            const nowtime = new Date();
+            lines.forEach(line=>{
+                const timematcherthingy = line.match(/(\d{2}:\d{2})/);
+                if (timematcherthingy) {
+                    const timeofthetask = timematcherthingy[1];
+
+
+                    const nameofthetask = line.replace(timeofthetask, '').replace('-','').trim();
+
+
+                    const [hours, mins] = timeofthetask.split(':');
+
+
+
+                    const targettimethingie = new Date();
+                    
+                    targettimethingie.setHours(parseInt(hours),parseInt(mins),0);
+                    
+
+
+                    const differentthings = targettimethingie - nowtime;
+                    let countdowntextdisplay = '';
+
+
+
+
+                    if (differentthings > 0) {
+                        const hr = Math.floor(differentthings/3600000).toString().padStart(2,'0');
+
+
+
+                        const minutes = Math.floor((differentthings%3600000)/60000).toString().padStart(2,'0');
+
+                        const seconds = Math.floor((differentthings%60000)/1000).toString().padStart(2,'0');
+
+
+                        countdowntextdisplay = `T-MINUS ${hr}:${minutes}:${seconds}`;
+                    } else {
+                        countdowntextdisplay = 'TASK DUE!';
+
+                    }
+
+
+
+                    const rowofnewitem = document.createElement('div');
+
+                    rowofnewitem.className = 'rowonewitemclass' + (differentthings > 0 && differentthings < 3600000 ? ' active ': '') + (differentthings > 0 && differentthings < 600000 ? ' urgent ': '');
+
+                    rowofnewitem.innerHTML = `
+                        <span>[${timeofthetask}] ${nameofthetask}</span> <span>${countdowntextdisplay}</span>`;
+                    funniconsolethingy.appendChild(rowofnewitem);
+                }
+            });
+        }
+        typablestuffthingy.addEventListener('input', funnithingthatreadstuff);
+        
+
+        setInterval(funnithingthatreadstuff, 1000);
+    </script>
+</body>
+</html>
