@@ -5,4 +5,6 @@ Credits: Background - https://www.space.com/27600-around-a-star-system-space-wal
 
 Demo can be found at https://vrramroop.github.io/AstronautTimer-TaskClock/
 
+The format for the tasks are, "HH:MM {put task here}" 
+
 The versions are in zip files. There is 1 file, the html, and one folder, the image folder. The hosted version is the demo.
